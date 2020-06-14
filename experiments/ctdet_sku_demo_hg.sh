@@ -1,0 +1,2 @@
+python3 src/demo.py ctdet --demo ./images/sku/ --debug 4 --dataset sku --exp_id sku_hg_demo --K 3000 --arch hourglass --vis_thresh 0.1 --nms --fix_res --gpus 1 --load_model exp/ctdet/sku_hg/model_last.pth
+#python3 src/test.py ctdet --debug 1 --dataset sku --exp_id sku_hg --K 300 --arch hourglass --fix_res --load_model exp/ctdet/sku_hg/model_best.pth

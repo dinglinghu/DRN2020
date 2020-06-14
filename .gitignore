@@ -1,0 +1,43 @@
+legacy/*
+.DS_Store
+*.DS_Store
+.idea/
+
+#Byte-compiled /optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+*.bak
+*.rar
+# c extentions
+*.so
+
+#Distribution / packaging
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib64/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+
+
+#pyenv
+.python-version
+
+#dotenv
+.env
+
+#virtualenv
+.venv
+venv/
+ENV/
