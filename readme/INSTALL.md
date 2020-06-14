@@ -32,6 +32,7 @@ After install Anaconda:
 3. Install [COCOAPI](https://github.com/cocodataset/cocoapi) and the variant version for rotation:
 
     ```
+    download cocoapi and move it to $DRN_ROOT/external
     cd $DRN_ROOT/external/cocoapi/PythonAPI
     make
     python setup.py install --user
@@ -50,9 +51,9 @@ After install Anaconda:
 5. Compile deformable convolutional v2 (from [DCNv2](https://github.com/chengdazhi/Deformable-Convolution-V2-PyTorch/tree/pytorch_1.0.0)).
 
     ```
-    cd $DRN_ROOT/src/lib/models/neworks
-    git clone -b pytorch_1.0.0 https://github.com/chengdazhi/Deformable-Convolution-V2-PyTorch.git
-    mv Deformable-Convolution-V2-PyTorch DCNv2
+    cd $DRN_ROOT/src/lib/external
+    # git clone -b pytorch_1.0.0 https://github.com/chengdazhi/Deformable-Convolution-V2-PyTorch.git
+    # mv Deformable-Convolution-V2-PyTorch DCNv2
     cd DCNv2
     ./make.sh
     ```
@@ -67,7 +68,7 @@ After install Anaconda:
 7. [Optional] Compile carafe if your want to use dense predict for DRHs.
 
     ```
-    cd $DRN_ROOT/src/lib/models/network/carafe
+    cd $DRN_ROOT/src/lib/external/carafe
     python setup develop
     ```
 
