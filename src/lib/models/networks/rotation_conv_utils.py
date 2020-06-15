@@ -122,9 +122,9 @@ class RotationConvLayer(ModulatedDeformConv):
 #
 #     Fuse multiple information from different branches where each neurons take different receptive fields.
 #     '''
-#     def __init__(self, dim_in, dcn=False):
+#     def __init__(self, dim_in, rot=False):
 #         super(FeatureSelectionModule, self).__init__()
-#         self.dcn = dcn
+#         self.rot = rot
 #         self._init_layers(dim_in)
 #
 #     def make_branch_layer(self, dim_in, dim_out, kernel, padding):
@@ -139,7 +139,10 @@ class RotationConvLayer(ModulatedDeformConv):
 #         :param padding: The padding for convolution.
 #         :return: Object of nn.Modulelist.
 #         """
-#         branch_fea = RotationConvLayer(dim_in, dim_out, kernel, stride=1, padding=padding,bias=False)
+#         if self.rot:
+#             branch_fea = RotationConvLayer(dim_in, dim_out, kernel, stride=1, padding=padding,bias=False)
+#         else:
+#             branch_fea = nn.Conv2d(dim_in, dim_out,kernel_size=kernel, padding=padding)
 #         branch_att = nn.Sequential(nn.ReLU(inplace=True),
 #                                    nn.Conv2d(1, 1, kernel_size=3, stride=1, padding=1)
 #                                    )

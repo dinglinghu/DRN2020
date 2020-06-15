@@ -21,7 +21,7 @@ class ModleWithLoss(torch.nn.Module):
   def forward(self, batch, fsm=False):
     if fsm:
       # outputs = self.model(batch['input'], angle_gt=batch['dense_angle'], angle_gt_mask=batch['dense_angle_mask'])
-      outputs = self.model(batch['input'], angle_gt=batch['dense_angle'])
+      outputs = self.model(batch['input'], angle_gt=batch['dense_angle'], train=True)
     else:
       outputs = self.model(batch['input'])
     loss, loss_stats = self.loss(outputs, batch)

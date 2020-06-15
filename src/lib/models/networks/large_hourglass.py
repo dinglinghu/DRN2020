@@ -405,7 +405,7 @@ class exkp(nn.Module):
             angle = angle * angle_mask + angle_pre * (1-angle_mask)
         return angle.detach()
 
-    def forward(self, image, angle_gt=None, angle_gt_mask=None, wh_gt=None):
+    def forward(self, image, angle_gt=None, angle_gt_mask=None, train=False):
         # print('image shape', image.shape)
         inter = self.pre(image)
         outs  = []
@@ -417,14 +417,17 @@ class exkp(nn.Module):
             out = {}
             # out['cnv'] = cnv
             if self.fea_sel:
-                fea_sel_ = self._fea_sel[ind]
-                if angle_gt is None:
-                    raise Exception('angle gt is need for fsm module')
-                else:
-                    layer = self.__getattr__('angle')[ind]
-                    angle_pred = layer(cnv)
-                    angle_for_fsm = self.get_angle_for_fsm(angle_pred.clone(), angle_gt.clone(), angle_gt_mask)
 
+                layer = self.__getattr__('angle')[ind]
+                angle_pred = layer(cnv)
+                if angle_gt is None:
+                    if train:
+                        raise Exception('angle gt is need for fsm module')
+                    else:
+                        angle_for_fsm = angle_pred.clone()
+                else:
+                    angle_for_fsm = self.get_angle_for_fsm(angle_pred.clone(), angle_gt.clone(), angle_gt_mask)
+                fea_sel_ = self._fea_sel[ind]
                 sel_cnv, att = fea_sel_(cnv, angle_for_fsm)
                 out['att'] = att
                 # out['sel_cnv'] = sel_cnv
